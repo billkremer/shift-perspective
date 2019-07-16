@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', 'HomeController@index');
+Route::get('/results', 'HomeController@results');
+
+
+Route::any('/{x}/{y?}/{z?}', function () {
+	return redirect('/'); // if someone tries something else it redirects to /.
+}); 
