@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center light-outline">
     <div class="col-md-6">
       <h2>Your Perspective</h2>
       <h3>Your Perspecive Type is {{}}</h3>
