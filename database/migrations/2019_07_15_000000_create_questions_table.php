@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('quizid')->references('id')->on('quiz');;
+            $table->integer('quizid')->references('id')->on('quiz');
             $table->text('question');
             $table->string('dimension');
             $table->tinyInteger('direction');
