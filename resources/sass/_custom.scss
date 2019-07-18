@@ -3,4 +3,15 @@
 .light-outline {
   border: 1px $light-grey solid;
   padding: 30px 30px 30px 30px;
+  text-align: center;
+}
+
+.radio-stretch > * {
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 12px;
+}
+
+.question-text {
+  font-size: 16px;
 }
