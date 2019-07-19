@@ -14,7 +14,7 @@
 
 
 Route::get('/', 'HomeController@index');
-Route::get('/results', 'HomeController@results');
+Route::post('/results', 'HomeController@results')->name('results');
 
 
 Route::any('/{x}/{y?}/{z?}', function () {
