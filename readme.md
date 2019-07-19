@@ -12,11 +12,11 @@
 ## How to run locally
 
 1. git clone this repo to your computer
-    * <code>$ git clone git@github.com:billkremer/shortenerl.git</code>
-2. <code>$ cd shortenerl</code>
+    * <code>$ git clone git@github.com:billkremer/shift-perspective.git</code>
+2. <code>$ cd shift-perspective</code>
 3. Install Dependencies
     * <code>$ composer install</code>
-    * <code>$ yarn</code>
+    * <code>$ npm install</code>TODO is this necessary?
 4. update .env
     * <code>$ cp .env.example .env</code>
 5. Add Key
@@ -35,6 +35,7 @@
 
 ## Find on Heroku
 
+https://phenomenal-perspectives.herokuapp.com/
 note: Heroku version of application uses PostgreSQL.
 
 ## Potential Issues / Considerations

@@ -43,7 +43,7 @@ class HomeController extends Controller
 
 
     /**
-     * Create a new shortened url.
+     * Display the results of the test.
      * @param Request $request
      * @return \Illuminate\Contracts\Support\Renderable
      */
