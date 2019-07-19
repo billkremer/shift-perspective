@@ -24,9 +24,20 @@
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary text-center">Save &amp; Continue</button> 
-                    <input hidden="hidden" value={{$quizId}}>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary ">Save &amp; Continue</button> 
+                    </div>
+                    <input hidden="hidden" value={{$quizId}} name="quizId">
                 </form>
             </div>
         </div>
