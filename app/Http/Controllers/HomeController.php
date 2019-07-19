@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 use App\Models\Question;
+use App\Models\Answer;
+use App\User;
 
 
 
@@ -33,52 +36,106 @@ class HomeController extends Controller
         $quizId = 1; // get the first quiz 
         // this could be passed dynamically if there are multiple quizzes.
         // for this code challenge, there is one quiz
-        $questions = Question::where('quizid', $quizId)->select('id', 'question', 'dimension', 'direction', 'meaning')->get();
+        $questions = Question::where('quizid', $quizId)->select('id', 'question', 'dimension', 'direction', 'meaning')->orderBy('id', 'asc')->get();
 
-// dump($questions->all()); 
-
-        return view('home', ['questions' => $questions->all()]);
+        return view('home', ['questions' => $questions->all(), 'quizId' => $quizId]);
     }
 
 
     /**
      * Create a new shortened url.
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function results(Request $request)
     {
+    
         $validatedData = $request->validate([
             'email' => 'required|string|email',
 
         ]);
 
-       
 
+        // check whether the user exists or create a new one.
+        $user = User::where('email', $request->email)->first();
 
+        if (empty($user->id)) {
+            $user = new User();
+            $user->email = $request->email;
+            $user->save();
+        };
 
-        $su = new Shorturl();
-        $su->userid = Auth::user()->id;
-        $su->url = $request->get('url');
-        $su->shorturl = $newSU;
+        foreach ($request->all() as $key => $value) {
+            if (Str::contains($key, 'questionAnswer')) {
+                $questionId = explode('-',$key)[1];
+                $resultArray[$questionId] = $value;
 
-        $su->save();
+                $ans = new Answer();
+                $ans->questionid = $questionId;
+                $ans->userid = $user->id;
+                $ans->answer = $value;
+                $ans->save();
+            }
+        }
+
+        $questionData = Question::whereIn('quizid', array_keys($resultArray))->select('id', 'question', 'dimension', 'direction', 'meaning')->get();
+
+        $results = $this->calculateResults($resultArray, $questionData);
 
         return view('results', ['results' => $results]);
     }
 
+
     /**
-     * Create a new shortened url.
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Calculate the result of the quiz.
+     * @param Array $resultArray
+     * @param Array $questionData
+     * @return Array $arrayToReturn
      */
-    private function calculateResults($resultArray) 
+    private function calculateResults($resultArray, $questionData) 
     {
-        $returnArray = [];
+        $arrayToReturn = ['summary' => '', // ENTJ
+                        'EI' => 4, // numerical value, default=4
+                        'SN' => 4,                    
+                        'TF' => 4,                    
+                        'JP' => 4,                    
+                        ];
+
+        $accumulatorArray = ['EI' => ['total' => 0, 'count' => 0],
+                             'SN' => ['total' => 0, 'count' => 0],
+                             'TF' => ['total' => 0, 'count' => 0],
+                             'JP' => ['total' => 0, 'count' => 0], ];
+
+                        // dump($resultArray, $questionData); 
 
 
+        foreach ($resultArray as $questionId => $result) {
+            $question = $questionData->where('id', $questionId)->first();
 
-        return $returnArray;
+            // TODO consider using:
+            // total = ($question->dimension + 1) * 0.5 * ($result) + ($question->dimension - 1) * -0.5 * (8 - $result)
+            // -1 goes to 0. 1 stays 1 & vice versa, do in one line, but unnecessarily complicated?
+            if ($question->direction > 0) {
+                $accumulatorArray[$question->dimension]['total'] += $result;
+            } else {
+                $accumulatorArray[$question->dimension]['total'] += (8 - $result);
+            }
+            $accumulatorArray[$question->dimension]['count'] += 1;
+
+        }
+
+        foreach ($accumulatorArray as $dimension => $values) {
+            $arrayToReturn[$dimension] = $values['total']/$values['count'];
+
+            if ($arrayToReturn[$dimension] <= 4 ) {
+                    $arrayToReturn['summary'] .= substr($dimension,0,1);
+            } else {
+                    $arrayToReturn['summary'] .= substr($dimension,1,1);
+            }
+
+        }
+
+        return $arrayToReturn;
     }
 
 
