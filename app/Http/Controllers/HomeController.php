@@ -49,12 +49,10 @@ class HomeController extends Controller
      */
     public function results(Request $request)
     {
-    
         $validatedData = $request->validate([
             'email' => 'required|string|email',
-
         ]);
-
+        // can't easily validate that questions have been answered since they are created dynamically
 
         // check whether the user exists or create a new one.
         $user = User::where('email', $request->email)->first();
