@@ -12,6 +12,32 @@
   font-size: 12px;
 }
 
-.question-text {
-  font-size: 16px;
+.question-text, .result-text {
+  font-size: 14px;
+}
+
+.result-color {
+  background-color: $perspective-purple;
+}
+
+.not-result-color {
+  background-color: $medium-grey;
+}
+
+.answer-bar {
+  width: 45%;
+  height: 14px;
+  .answer-bar-right {
+    border-radius: 0 2px 2px 0;
+
+  };
+  .answer-bar-left {
+    border-radius: 2px 0 0 2px;
+  }
+}
+
+.result-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 }

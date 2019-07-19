@@ -2,39 +2,48 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
-  <div class="row justify-content-center light-outline">
-    <div class="col-md-6">
-      <h2>Your Perspective</h2>
-      <h3>Your Perspecive Type is {{}}</h3>
+<div class="container result-text">
+  <div class="row justify-content-center light-outline text-left">
+    <div class="col-md-6 text-left align-self-center">
+      <h1>Your Perspective</h1>
+      <p>Your Perspective Type is {{$results['summary']}}</p>
     </div>
+
+
     <div class="col-md-6">
-      <div class="row">
-        <span>Intraversion (I)</span>
-          <div class="answerBar {{}}"></div>
-          <div class="answerBar {{}}"></div>
+      <div class="result-grid-container">
+        <span>Introversion (I)</span>
+        <div class="d-inline-flex align-self-center">
+          <div class="answer-bar answer-bar-left @if ($results['EI'] > 4) result-color @else not-result-color @endif"></div>
+          <div class="answer-bar answer-bar-right @if ($results['EI'] <= 4) result-color @else not-result-color @endif"></div>
+        </div>
         <span>Extraversion (E)</span>
-      </div>
-      <div class="row">
+
         <span>Sensing (S)</span>
-          <div class="answerBar {{}}"></div>
-          <div class="answerBar {{}}"></div>
+        <div class="d-inline-flex align-self-center">
+          <div class="answer-bar answer-bar-left @if ($results['SN'] <= 4) result-color @else not-result-color @endif"></div>
+          <div class="answer-bar answer-bar-right @if ($results['SN'] > 4) result-color @else not-result-color @endif"></div>
+        </div>
         <span>Intuition (N)</span>
-      </div>
-      <div class="row">
+
         <span>Thinking (T)</span>
-          <div class="answerBar {{}}"></div>
-          <div class="answerBar {{}}"></div>
+        <div class="d-inline-flex align-self-center">
+          <div class="answer-bar answer-bar-left @if ($results['TF'] <= 4) result-color @else not-result-color @endif"></div>
+          <div class="answer-bar answer-bar-right @if ($results['TF'] > 4) result-color @else not-result-color @endif"></div>
+        </div>
         <span>Feeling (F)</span>
-      </div>
-      <div class="row">
+
         <span>Judging (J)</span>
-          <div class="answerBar {{}}"></div>
-          <div class="answerBar {{}}"></div>
+        <div class="d-inline-flex align-self-center">
+          <div class="answer-bar answer-bar-left @if ($results['JP'] <= 4) result-color @else not-result-color @endif"></div>
+          <div class="answer-bar answer-bar-right @if ($results['JP'] > 4) result-color @else not-result-color @endif"></div>
+        </div>
         <span>Perceiving (P)</span>
+
       </div>
 
     </div>
+
 
   </div>
 </div>
