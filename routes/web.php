@@ -11,7 +11,9 @@
 |
 */
 
-
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 Route::get('/', 'HomeController@index');
 Route::post('/results', 'HomeController@results')->name('results');

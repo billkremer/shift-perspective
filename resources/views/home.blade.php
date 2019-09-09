@@ -14,7 +14,11 @@
                     @csrf
 
                     @foreach ($questions as $question) 
-                        @include('question', $question)
+                        {{-- @include('question', $question) --}}
+                        <question 
+                            :question="{{$question}}">
+                        </question>
+
                     @endforeach
                     {{-- for a short quiz, this is ok, otherwise may need to show a set amount at any time. --}}
 
