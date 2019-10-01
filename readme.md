@@ -57,4 +57,5 @@ note: Heroku version of application uses PostgreSQL.
 * 17-07-2019 initial controllers and models, formatting of questions
 * 18-07-2019 updates to formatting, parse answers into Type Indicators
 * 19-07-2019 cleanup of loose ends & review documentation
+* 09-09-2019 changed Blade templates to Vue templates
 
