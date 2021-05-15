@@ -46,5 +46,10 @@
 
 
   </div>
+  <div class="row justify-content-center light-outline text-left">
+    <div class="col-md-12 align-self-center">
+      <a href="{{ route('questionnaire')}}"><button type="button" class="btn btn-primary ">Retake the questionnaire</button>
+    </div>      
+  </div>
 </div>
 @endsection

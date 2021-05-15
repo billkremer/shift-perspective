@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,12 +15,9 @@
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
-Route::get('/', 'HomeController@index');
-Route::post('/results', 'HomeController@results')->name('results');
+Route::get('/',[HomeController::class, 'index'])->name('questionnaire');
+Route::post('/results',[HomeController::class, 'results'])->name('results');
 
 
 Route::any('/{x}/{y?}/{z?}', function () {

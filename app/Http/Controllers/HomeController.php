@@ -8,8 +8,7 @@ use Illuminate\Support\Arr;
 
 use App\Models\Question;
 use App\Models\Answer;
-use App\User;
-
+use App\Models\User;
 
 
 class HomeController extends Controller
@@ -19,10 +18,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth');
+    // }
 
 
     /**
@@ -32,6 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         // get current quiz questions
         $quizId = 1; // get the first quiz 
         // this could be passed dynamically if there are multiple quizzes.
@@ -135,6 +135,15 @@ class HomeController extends Controller
 
         return $arrayToReturn;
     }
+
+
+
+
+
+
+
+
+
 
 
 }

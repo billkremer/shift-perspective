@@ -1,8 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('quizzes')->insert([
             'id' => 1,
             'quizname' => "Perspective",
@@ -45,6 +45,10 @@ class DatabaseSeeder extends Seeder
                 
             ]);
         }
+    }
+}
+
+        // \App\Models\User::factory(10)->create();
 
         // DB::table('users')->insert([
         //     'name' => Str::random(10),
@@ -58,13 +62,3 @@ class DatabaseSeeder extends Seeder
         //     'userid' => ,
         //     'answer' => ,
         // ]);
-
-
-
-
-
-
-
-
-    }
-}
